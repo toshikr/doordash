@@ -1,12 +1,15 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { APP_LOGO_LINK } from "../utils/constants";
 import { Link } from "react-router-dom";
-import useOnlineStatus from "../utils/useOnlineStatus";
-
+import useOnlineStatus from "../utils/customHooks/useOnlineStatus";
+import UserProfileContext from "../utils/contextAPIs/UserProfileContext";
 const Header = () => {
     const [loginBtnName,setLoginBtnName] = useState("Login");
 
     const [cartBtn,setCartBtn] = useState("");
+
+    // const UsernameData = useContext(UserProfileContext);
+    const {loggedInUser} = useContext(UserProfileContext);
 
     const onlineStatus = useOnlineStatus();
 
@@ -37,7 +40,11 @@ const Header = () => {
                     </li>  
                     <button className="login-btn" onClick={() => {
                         loginBtnName === "Login" ? setLoginBtnName("Logout") : setLoginBtnName("Login");
-                    }}>{loginBtnName}</button>
+                    }}>{loginBtnName}
+                    </button>
+                    <li className="px-4">
+                        <Link>{loggedInUser}</Link>
+                    </li>
                 </ul>  
             </div>
         </div>

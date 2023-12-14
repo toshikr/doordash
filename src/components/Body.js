@@ -4,7 +4,7 @@ import { useState } from "react";
 import ShimmerUI from "./ShimmerUI";
 import { Link } from "react-router-dom";
 import { GET_ALL_REST_LINK } from "../utils/constants";
-import useOnlineStatus from "../utils/useOnlineStatus";
+import useOnlineStatus from "../utils/customHooks/useOnlineStatus";
 
 const Body = () => {
     const [listOfRest,setListOfRest] = useState([]);
@@ -22,7 +22,7 @@ const Body = () => {
         //wait for the above promise to resolve and return the response then convert data into valid json
         const jsonData = await response.json();
         //check exactly what data came in json
-        console.log("json data of all rest",jsonData);
+        // console.log("json data of all rest",jsonData);
         setListOfRest(jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
         setFilteredRestList(jsonData?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants);
     };
